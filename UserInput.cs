@@ -5,38 +5,46 @@ namespace Snake
     class UserInput
     {
         static char lastInput = 'd';
-        static public bool Read()
+        static public void Read(Snake snake)
         {
             var startTime = DateTime.Now;
             char input = lastInput;
-            bool unReadKey = true;
             while (DateTime.Now.Subtract(startTime).TotalMilliseconds < 400)
             {
-                if (Console.KeyAvailable && unReadKey)
+                if (Console.KeyAvailable)
                 {
-                    input = Console.ReadKey(true).KeyChar;
-                    unReadKey = false;
+                        input = Console.ReadKey(true).KeyChar;
                 }
                 else
                 {
-                    switch(input, lastInput){
-                        case ('a', 'd'): continue;
-                        case ('d', 'a'): continue;
-                        case ('w', 's'): continue;
-                        case ('s', 'w'): continue;
+                    if(snake.snakeBody.Contains((snake.Head.Item1-1, snake.Head.Item2)) && input == 'a'){
+                        input = lastInput;
+                        continue;
+                    }
+                    if(snake.snakeBody.Contains((snake.Head.Item1+1, snake.Head.Item2)) && input == 'd'){
+                        input = lastInput;
+                        continue;
+                    }
+                    if(snake.snakeBody.Contains((snake.Head.Item1, snake.Head.Item2-1)) && input == 'w'){
+                        input = lastInput;
+                        continue;
+                    }
+                    if(snake.snakeBody.Contains((snake.Head.Item1, snake.Head.Item2+1)) && input == 's'){
+                        input = lastInput;
+                        continue;
                     }
                 if(!(input == 'a' || input == 'w' || input == 's' || input == 'd')){
-                    return false;
+                    input = lastInput;
+                    continue;
                 }
                 lastInput = input;
-                }
             }
-            return true;
+        }
         }
         static public char LastInput
         {
             get {return lastInput;}
             set{lastInput = value;}
         }
-    }
+}
 }

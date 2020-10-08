@@ -12,7 +12,7 @@ namespace Snake
             while (GameOngoing(snake, field))
             {
                 Render.Print(field, snake);
-                if(UserInput.Read()){
+                UserInput.Read(snake);
                     if (snake.Head == field.Fruit)
                 {
                     snake.Eat();
@@ -20,9 +20,7 @@ namespace Snake
                 }
                 else{
                      snake.Move();
-                }
-                }
-                
+                }     
             }
             if(snake.Length + 1 >= field.Width*field.Heigth){
                 Console.WriteLine("So you found a Hamiltonian cycle. Impressive!");
