@@ -9,12 +9,13 @@ namespace Snake
         {
             var startTime = DateTime.Now;
             char input = lastInput;
-
+            bool unReadKey = true;
             while (DateTime.Now.Subtract(startTime).TotalMilliseconds < 400)
             {
-                if (Console.KeyAvailable)
+                if (Console.KeyAvailable && unReadKey)
                 {
                     input = Console.ReadKey(true).KeyChar;
+                    unReadKey = false;
                 }
                 else
                 {
@@ -26,8 +27,8 @@ namespace Snake
                     }
                 if(!(input == 'a' || input == 'w' || input == 's' || input == 'd')){
                     return false;
-                }    
-                    lastInput = input;
+                }
+                lastInput = input;
                 }
             }
             return true;
