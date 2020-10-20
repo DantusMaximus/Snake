@@ -2,6 +2,7 @@ using System;
 namespace Snake{
     class Render{
         static public void Print(Field field, Snake snake){
+            Console.Clear();
             Console.WriteLine();
             EndRow(field.Width+2);
             for(int y = 0; y < field.Heigth; y++){
