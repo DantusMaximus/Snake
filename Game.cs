@@ -7,6 +7,7 @@ namespace Snake
         
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             Snake snake = new Snake(Int32.Parse(args[0]), Int32.Parse(args[1]), Int32.Parse(args[2]));
             Field field = new Field(Int32.Parse(args[0]), Int32.Parse(args[1]));
             while (GameOngoing(snake, field))

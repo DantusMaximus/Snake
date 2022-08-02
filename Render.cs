@@ -3,37 +3,46 @@ namespace Snake{
     class Render{
         static public void Print(Field field, Snake snake){
             Console.Clear();
-            Console.WriteLine();
-            EndRow(field.Width+2);
+            string text = "";
+            text += "\n"; //Console.WriteLine();
+            text += EndRow(field.Width+2);
             for(int y = 0; y < field.Heigth; y++){
-                Row(field, y, snake);
+                text += Row(field, y, snake);
             }
-            EndRow(field.Width+2);
+            text += EndRow(field.Width+2);
+            Console.Write(text);
         }
-        static void Row(Field field, int y, Snake snake){
-            Console.Write("#");
+        static string Row(Field field, int y, Snake snake){
+            string text = "#"; //Console.Write("#");
             for(int x = 0; x < field.Width; x ++){
-                Console.ForegroundColor = ConsoleColor.White;
+                //Console.ForegroundColor = ConsoleColor.White;
                 if(snake.snakeBody.Contains((x,y)) || (snake.Head.Item1 == x && snake.Head.Item2 == y)){
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write("O");
+                    //Console.ForegroundColor = ConsoleColor.Green;
+                    //Console.Write("O");
+                    text += "s";
                     continue;
                 }
                 else if(field.Fruit.Item1 == x && field.Fruit.Item2 == y){
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("X");
+                    //Console.ForegroundColor = ConsoleColor.Red;
+                    //Console.Write("X");
+                    text += "f";
                     continue;
                 }
-                Console.Write(" ");
+                //Console.Write(" ");
+                text += " ";
             }
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("#");
+            //Console.ForegroundColor = ConsoleColor.White;
+            //Console.WriteLine("#");
+            text += "#\n";
+            return text;
         }
-        static void EndRow(int width){
+        static string EndRow(int width){
+            string text = "";
             for(int i = 0; i<width; i++){
-                Console.Write("#");
+                text += "#"; //Console.Write("#");
             }
-            Console.WriteLine();
+            text += "\n"; //Console.WriteLine();
+            return text;
         }
     }
 }
